@@ -354,15 +354,5 @@ class KNN{
     }
     return KNN.kNearest(distances, 1)
     
-  }
-  
+  } 
 }
-
-
-
-let i = document.querySelector('img')
-let i2 = document.querySelectorAll('img')[1]
-let m = new KNN(100, 1)
-m.addExample(i, "shekhar")
-m.addExample(i2, "shekha")
-console.log(m.classify(i))
