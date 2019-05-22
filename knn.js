@@ -264,7 +264,7 @@ class fnn {
 
 class KNN{
   constructor(il, k){
-    this.k || 1
+    this.k = k || 1
     this.length = il
     this.model = new fnn([this.length, 200, 10])
     this.examples = new Array()
@@ -322,7 +322,6 @@ class KNN{
   static kNearest(distances, k){
     let kn = []
     for(let i=0; i<k; i++){
-      console.log(1)
       let smallest = Infinity
       let n, index
       for(let j=0; j<distances.length; j++){
@@ -352,7 +351,24 @@ class KNN{
       let d = KNN.distance(infer, example.infer)
       distances.push({distance: d, label: example.label})
     }
-    return KNN.kNearest(distances, 1)
-    
-  } 
+    let kn =  KNN.kNearest(distances, this.k)
+    let first = kn[0]
+    let sum = 0
+    for(let i=0; i<kn.length; i++){
+      if(first.label == kn[i].label){
+        sum++
+      }
+    }
+    let accuracy = sum/kn.length
+    return {
+      label: first.label,
+      accuracy: accuracy,
+      index: this.label.indexOf(first.label)
+    }
+  }
+  
 }
+
+
+
+  
